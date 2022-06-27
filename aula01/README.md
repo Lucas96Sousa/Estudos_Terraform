@@ -4,4 +4,33 @@ docker run -it -v $PWD:/app -w /app --entrypoint "" hashicorp/terraform:light sh
 
 
 # Terraform plan methods
-Utilizar o terraform plan -out para determinar um plan separado
+### Utilizar o terraform plan -out para determinar um plan separado, exemplo: 
+
+<b>terraform plan -out anotherPlan</b>
+
+# Uso de referências
+### Exemplo de uso de referência: 
+
+<p>
+output "ip_address" {
+  value = aws_instance.web.public_ip
+} 
+</p>
+Nesse caso estamos apontado para um recurso.
+
+
+# Uso do metodo data
+O data ira buscar a informação dentro do provider, que esta descrito na função.
+
+exemplo de uso: 
+```
+resource "aws_instance" "web" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+```
+No método ami, passamos o data.aws para que gere um id dinâmico, o mesmo ocorre no output.tf com o value do ip_address 

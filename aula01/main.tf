@@ -1,12 +1,33 @@
 provider "aws" {
-  region  = "us-west-1"
-  version = "4.19.0"
+  region = "us-west-1"
+}
+
+provider "aws" {
+  alias  = "west-2"
+  region = "us-west-2"
+}
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  owners = ["099720109477"] # Ubuntu
 }
 
 terraform {
-  backend  "s3" {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+  }
+  backend "s3" {
     bucket = "terraformtips"
     key    = "terraform-test.tfstate"
-    region = "us-west-1"  
+    region = "us-west-1"
   }
 }
