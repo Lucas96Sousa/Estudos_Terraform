@@ -2,11 +2,6 @@ provider "aws" {
   region = "us-west-1"
 }
 
-provider "aws" {
-  alias  = "west-2"
-  region = "us-west-2"
-}
-
 data "aws_ami" "ubuntu" {
   most_recent = true
 
