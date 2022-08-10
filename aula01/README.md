@@ -38,3 +38,7 @@ resource "aws_instance" "web" {
 ```
 
 No método ami, passamos o data.aws para que gere um id dinâmico, o mesmo ocorre no output.tf com o value do ip_address
+
+
+## Uso de variaveis
+<p> Todo arquivo que termine com .auto.tfvars quando for executado o plan -out será usado os dados contidos no arquivo .auto.tfvars </p>
