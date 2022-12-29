@@ -71,3 +71,42 @@ module "name" {
 ```
 
 <b>No arquivo de variables, criar uma variavél nova vazia com o nome do seu modulo </b>
+
+### DynamoDB - Lock State
+
+dynamodb.tf 
+
+```
+resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
+  name = "terraform-state-lock-dynamo"
+  hash_key = "LockID"
+  read_capacity = 20
+  write_capacity = 20
+
+  attribute {
+    name= "LockID"
+    type = "S"
+  }
+
+  tags = {
+    name = "DynamoDB Terraform State Lock"
+
+  }
+}
+```
+
+main.tf
+
+backend {
+dynamodb_table = "terraform-state-lock-dynamo"
+}
+
+
+### Terraform import
+Não gera codigo, apenas importa para o state.
+
+
+### Terraform workspace
+Permite trabalhar com varias instancias com diferentes clouds.
+
+Para listar os workspace diferentes o comando é terraform workspace list
