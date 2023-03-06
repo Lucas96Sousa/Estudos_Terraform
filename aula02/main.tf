@@ -22,8 +22,9 @@ terraform {
   }
   backend "s3" {
     bucket = "terraformtips"
-    dynamodb_table = "terraform-state-lock-dynamo"
+    //dynamodb_table = "terraform-state-lock-dynamo"
     key    = "terraform-test.tfstate"
     region = "us-west-1"
+    encrypt = true
   }
 }
