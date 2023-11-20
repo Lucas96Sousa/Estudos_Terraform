@@ -1,15 +1,15 @@
 variable "image_id" {
-  default = "ami-040a251ee9d7d1a9b"
-  type= string
-  description= "The id of the machine image (AMI) to use for the server"
+  default     = "ami-040a251ee9d7d1a9b"
+  type        = string
+  description = "The id of the machine image (AMI) to use for the server"
 
 
-sensitive = true
+  sensitive = true
 
-validation { 
-  condition = length(var.image_id) >  4 && substr (var.image_id, 0, 4) == "ami-"
-  error_message ="The image_id value must be a valid AMI id, startingg with \"ami-\"."
-   
+  validation {
+    condition     = length(var.image_id) > 4 && substr(var.image_id, 0, 4) == "ami-"
+    error_message = "The image_id value must be a valid AMI id, startingg with \"ami-\"."
+
   }
 }
 

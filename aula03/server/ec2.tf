@@ -1,6 +1,6 @@
 resource "aws_instance" "web" {
   ami           = var.image_id
-  instance_type = "t3.micro"
+  instance_type = "t2.micro"
 
   tags = {
     Name = "Terraform tips"
@@ -8,8 +8,8 @@ resource "aws_instance" "web" {
 }
 
 resource "aws_instance" "web2" {
-  ami = var.image_id
-  instance_type = "t3.micro"
+  ami           = var.image_id
+  instance_type = "t2.micro"
 
   tags = {
     Name = "Terraform Tips 2"
@@ -20,6 +20,6 @@ resource "aws_instance" "web2" {
 }
 
 resource "aws_eip" "ip" {
-  vpc= true
+  vpc      = true
   instance = aws_instance.web.id
-  }
+}
